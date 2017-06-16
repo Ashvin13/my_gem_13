@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<div class="show_reciepes">
+	<table class="table">
+		<tr>
+			<th><strong>Recipes_name:</strong></th>
+			<th><strong>Ingredients:</strong></th>
+			<th><strong>Recipes_type:</strong></th>
+			<th><strong>Description</strong></th>
+			<th><strong>Email</strong></th>
+		</tr>
+		<tr>
+			<td><%= @recipe.recipes_name %></td>
+			<td><%= @recipe.ingredients %></td>
+			<td><%= @recipe.recipes_type %></td>
+			<td><%= @recipe.description %></td>
+			<td><%= @recipe.email %></td>
+		</tr>
+	</table>
+</div>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %>

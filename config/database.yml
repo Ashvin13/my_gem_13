@@ -1,0 +1,23 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
+  username: postgres
+  password: postgres
+
+development:
+  <<: *common
+  database: gemdemo_new
+
+# test:
+#   <<: *common
+#   database: travelshopa_test
+
+# staging:
+#   <<: *common
+#   database: travelshopa_staging
+
+# production:
+#   <<: *common
+#   database: travelshopa_production
