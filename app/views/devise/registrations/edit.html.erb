@@ -31,6 +31,12 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :role %></br>
+    <%= f.radio_button :role, true %> Admine
+    <%= f.radio_button :role, false %> User
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

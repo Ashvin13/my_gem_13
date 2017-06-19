@@ -1,0 +1,11 @@
+<section class="header">
+	<% if user_signed_in? %>
+		<span id="log-out-btn">
+			<%= link_to 'Log-out', destroy_user_session_path, :method => :delete %>
+		</span>
+	<% else %>
+		<span id="log-in-btn">
+			<%= link_to 'Log-in', new_user_session_path %>
+		</span>
+	<% end %>
+</section>

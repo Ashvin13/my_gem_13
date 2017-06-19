@@ -1,3 +1,4 @@
+<%= render 'header' %>
 <p id="notice"><%= notice %></p>
 
 <h1>Recipes</h1>
@@ -32,11 +33,15 @@
         <td><%= recipe.email %></td>
       </tr>
       <tr>
-        <td><%= link_to 'Show', recipe %></td>
-        <% if can? :update, @recipe %>
+        <% if can? :read, recipe %>
+          <td><%= link_to 'Show', recipe %></td>
+        <% end %>
+        <% if can? :update, recipe %>
           <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
         <% end %>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :destroy, recipe %>
+          <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

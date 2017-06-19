@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /recipes
   # GET /recipes.json
   def index
@@ -10,12 +10,10 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @recipe = Recipe.find(params[:id])
   end
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
   end
 
   # GET /recipes/1/edit
@@ -25,7 +23,8 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @user = current_user
+    @recipe = @user.recipes.new(recipe_params)
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
@@ -70,6 +69,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:recipes_name, :ingredients, :recipes_type, :description, :email)
+      params.require(:recipe).permit(:recipes_name, :ingredients, :recipes_type, :description, :email, :user_id)
     end
 end

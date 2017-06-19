@@ -1,4 +1,5 @@
 <%= form_for(@recipe) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <% if @recipe.errors.any? %>
     <div id="error_explanation">
       <h2>
