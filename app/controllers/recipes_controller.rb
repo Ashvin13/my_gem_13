@@ -3,8 +3,33 @@ class RecipesController < ApplicationController
   load_and_authorize_resource
   # GET /recipes
   # GET /recipes.json
+  # def index
+  #   @recipes = Recipe.all
+  #   if params[:search]
+  #     @recipes = Recipe.search(params[:search])
+  #   else
+  #     @recipes = Recipe.all.order('created_at DESC')
+  #   end
+  # end
+
   def index
-    @recipes = Recipe.all
+    search = params[:search].present? ? params[:search] : nil
+    @recipes = if search
+       Recipe.where("recipes_name LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%") 
+     else
+       Recipe.all
+    end
+  end
+
+
+  def autocomplete
+    render json: Recipe.search(params[:query], {
+      fields: ["recipes_name^5", "description"],
+      match: :word_start,
+      limit: 10,
+      load: false,
+      misspellings: {below: 5}
+    }).map(&:recipes_name)
   end
 
   # GET /recipes/1
@@ -69,6 +94,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:recipes_name, :ingredients, :recipes_type, :description, :email, :user_id)
+      params.require(:recipe).permit(:recipes_name, :ingredients, :recipes_type, :description, :email, :user_id, :image)
     end
 end

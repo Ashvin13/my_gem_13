@@ -7,6 +7,7 @@
 			<th><strong>Recipes_type:</strong></th>
 			<th><strong>Description</strong></th>
 			<th><strong>Email</strong></th>
+			<th><strong>Image</strong></th>
 		</tr>
 		<tr>
 			<td><%= @recipe.recipes_name %></td>
@@ -14,6 +15,7 @@
 			<td><%= @recipe.recipes_type %></td>
 			<td><%= @recipe.description %></td>
 			<td><%= @recipe.email %></td>
+			<td><%= image_tag @recipe.image_url(:thumb).to_s if @recipe.image? %></td>
 		</tr>
 	</table>
 </div>

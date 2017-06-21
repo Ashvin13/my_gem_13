@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.form-validator
+//= require typeahead.bundle
+//= require recipes_search
 //= require_tree .
 
 $(document).ready(function() {

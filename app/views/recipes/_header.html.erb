@@ -1,11 +1,28 @@
 <section class="header">
-	<% if user_signed_in? %>
-		<span id="log-out-btn">
-			<%= link_to 'Log-out', destroy_user_session_path, :method => :delete %>
-		</span>
-	<% else %>
-		<span id="log-in-btn">
-			<%= link_to 'Log-in', new_user_session_path %>
-		</span>
-	<% end %>
+	<div class="headerdiv">
+		<% if user_signed_in? %>
+			<span id="log-out-btn">
+				<%= link_to 'Log-out', destroy_user_session_path, :method => :delete %>
+			</span>
+		<% else %>
+			<span id="log-in-btn">
+				<%= link_to 'Log-in', new_user_session_path %>
+			</span>
+		<% end %>
+	</div>
+	<div class="searchdiv">
+		<div class="search-form">
+			<%= form_tag recipes_path, :method => 'get' do %>
+			<% if @recipes.present? %>
+	  			<%= render @recipes %>
+			<% else %>
+	  			<p>There are no recipes containing the term(s) <%= params[:search] %>.</p>
+			<% end %>
+			  <p>
+			    <%= text_field_tag :search, params[:search], id: 'recipes_search', autocomplate: :off, placeholder: "Search Recipes" %>
+			    <%= submit_tag "Search", :name => nil %>
+			  </p>
+			<% end %>
+		</div>
+	</div>
 </section>
