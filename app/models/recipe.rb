@@ -3,7 +3,7 @@ class Recipe < ActiveRecord::Base
 	belongs_to :user
 	mount_uploader :image, ImageUploader
 
-	# searchkick word_start: [:recipes_name, :description]
+	searchkick word_start: [:recipes_name, :description]
 
 	def search_data
 	    {
