@@ -26,8 +26,8 @@ class RecipesController < ApplicationController
     # img = "public/uploads/recipe/image/5/test1.jpg"
     # value = load('../lib/assets/test.rb test2.jpg')
 
-    # filepath = Rails.root.join('lib', 'assets', 'test.rb')
-    # output = `ruby #{filepath} lib/assets/test2.jpg`
+    filepath = Rails.root.join('lib', 'assets', 'test.rb')
+    output = `ruby #{filepath} lib/assets/test2.jpg`
     # puts output
     # result = `python lib/assets/script.py #{img}`
   end
