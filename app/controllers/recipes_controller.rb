@@ -13,12 +13,23 @@ class RecipesController < ApplicationController
   # end
 
   def index
+    # @racipes = Recipe.all
+    # @racipes.each do |r|
+    #   abort r.image.inspect
+    # end
     search = params[:search].present? ? params[:search] : nil
     @recipes = if search
        Recipe.where("recipes_name LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%") 
      else
        Recipe.all
     end
+    # img = "public/uploads/recipe/image/5/test1.jpg"
+    # value = load('../lib/assets/test.rb test2.jpg')
+
+    filepath = Rails.root.join('lib', 'assets', 'test.rb')
+    output = `ruby #{filepath} lib/assets/test2.jpg`
+    # puts output
+    # result = `python lib/assets/script.py #{img}`
   end
 
 
@@ -84,6 +95,14 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def contact
+  end
+
+  def contact_us
+    UserMailer.contact_email(params[:name], params[:email], params[:message]).deliver
+    redirect_to '/'
   end
 
   private

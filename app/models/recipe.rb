@@ -5,6 +5,9 @@ class Recipe < ActiveRecord::Base
 
 	searchkick word_start: [:recipes_name, :description]
 
+	validates_presence_of :recipes_name
+	validates_presence_of :email
+
 	def search_data
 	    {
 	      recipes_name: recipes_name,
@@ -12,11 +15,10 @@ class Recipe < ActiveRecord::Base
 	    }
   	end
 
-	# def self.search(search)
-	#   if search
-	#     where("recipes_name like ?", "%#{search}%")
-	#   else
-	#     find(:all)
-	#   end
-	# end
+  	def self.mail_recap_semaine
+  		@recipe = Recipe.all
+  		@recipe.each do |r|
+      		UserMailer.mail_recap_semaine(r.email).deliver
+    	end
+  	end
 end

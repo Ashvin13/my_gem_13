@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :recipes do
+    get :contact, :on => :collection
+    post :contact_us, :on => :collection
     collection do
       get :autocomplete
     end
